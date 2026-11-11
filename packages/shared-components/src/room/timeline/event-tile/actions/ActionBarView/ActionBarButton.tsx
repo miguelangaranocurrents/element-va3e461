@@ -49,11 +49,13 @@ export function ActionBarButton({
         localRef.current.tabIndex = tabIndex;
     }, [tabIndex]);
 
-    const handleContextMenu = (event: React.MouseEvent<HTMLButtonElement>): void => {
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
         event.preventDefault();
         event.stopPropagation();
         onActivate?.(event.currentTarget);
     };
+
+    const handleContextMenu = handleClick;
 
     return (
         <Tooltip description={tooltipDescription ?? label} caption={tooltipCaption} placement="top">
@@ -67,7 +69,7 @@ export function ActionBarButton({
                 aria-pressed={ariaPressed}
                 aria-expanded={ariaExpanded}
                 disabled={disabled}
-                onClick={(event) => onActivate?.(event.currentTarget)}
+                onClick={handleClick}
                 onContextMenu={handleContextMenu}
                 onFocus={disabled ? undefined : onFocus}
                 className={styles.toolbar_item}

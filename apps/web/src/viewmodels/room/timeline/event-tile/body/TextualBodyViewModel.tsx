@@ -275,6 +275,9 @@ export class TextualBodyViewModel
     }
 
     public onRootClick = (event: MouseEvent<HTMLDivElement>): void => {
+        // Links with their own click handling (e.g. pills) have already dealt with the click
+        if (event.defaultPrevented) return;
+
         let target: HTMLLinkElement | null = event.target as HTMLLinkElement;
 
         if (target.nodeName !== "A") {
